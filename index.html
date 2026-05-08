@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fahri Roblox Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+overflow-x:hidden;
+}
+
+/* BACKGROUND */
+.bg{
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top left,#38bdf833,transparent 30%),
+radial-gradient(circle at bottom right,#9333ea33,transparent 30%);
+z-index:-1;
+}
+
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:rgba(15,23,42,0.7);
+backdrop-filter:blur(12px);
+position:sticky;
+top:0;
+z-index:999;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.logo{
+font-size:25px;
+font-weight:700;
+background:linear-gradient(90deg,#38bdf8,#a855f7);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.owner-btn{
+background:linear-gradient(90deg,#38bdf8,#a855f7);
+border:none;
+padding:12px 18px;
+border-radius:15px;
+color:white;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.owner-btn:hover{
+transform:scale(1.05);
+}
+
+/* HERO */
+.hero{
+padding:60px 20px;
+text-align:center;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.hero p{
+opacity:0.8;
+font-size:17px;
+}
+
+/* SCRIPT LIST */
+.container{
+padding:20px;
+}
+
+.script-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+/* CARD */
+.card{
+background:rgba(30,41,59,0.8);
+backdrop-filter:blur(15px);
+padding:20px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 0 25px rgba(0,0,0,0.3);
+transition:0.3s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+width:200px;
+height:200px;
+background:linear-gradient(90deg,#38bdf833,#a855f733);
+border-radius:50%;
+top:-100px;
+right:-100px;
+}
+
+.card:hover{
+transform:translateY(-7px);
+}
+
+.script-name{
+font-size:24px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.script-price{
+display:inline-block;
+padding:7px 15px;
+background:#22c55e22;
+border:1px solid #22c55e55;
+border-radius:12px;
+color:#4ade80;
+font-weight:600;
+margin-bottom:15px;
+}
+
+.script-desc{
+opacity:0.8;
+font-size:14px;
+line-height:1.5;
+margin-bottom:20px;
+}
+
+/* BUTTON */
+.buy-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:15px;
+background:linear-gradient(90deg,#38bdf8,#a855f7);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.buy-btn:hover{
+transform:scale(1.03);
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:1000;
+padding:20px;
+}
+
+.modal-content{
+background:#111827;
+width:100%;
+max-width:420px;
+padding:25px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.08);
+animation:pop 0.3s ease;
+}
+
+@keyframes pop{
+from{
+transform:scale(0.8);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.modal-content h2{
+margin-bottom:20px;
+text-align:center;
+}
+
+input,textarea{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:none;
+outline:none;
+border-radius:15px;
+background:#1e293b;
+color:white;
+font-size:15px;
+}
+
+textarea{
+resize:none;
+height:120px;
+}
+
+.add-btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:15px;
+background:linear-gradient(90deg,#38bdf8,#a855f7);
+color:white;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+margin-top:5px;
+}
+
+.close-btn{
+background:#ef4444;
+}
+
+footer{
+margin-top:60px;
+padding:25px;
+text-align:center;
+opacity:0.6;
+font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<header>
+<div class="logo">🔥 Fahri Store</div>
+<button class="owner-btn" onclick="openLogin()">☰ Owner</button>
+</header>
+
+<section class="hero">
+<h1>🛒 Jual Script Roblox Premium</h1>
+<p>Script gacor, UI keren, tinggal pakai cok 😹🔥</p>
+</section>
+
+<div class="container">
+<div class="script-list" id="scriptList"></div>
+</div>
+
+<footer>
+© Fahri Roblox Store
+</footer>
+
+<!-- LOGIN -->
+<div class="modal" id="loginModal">
+<div class="modal-content">
+<h2>🔐 Login Owner</h2>
+
+<input type="text" id="username" placeholder="Nama">
+<input type="password" id="password" placeholder="Password">
+
+<button class="add-btn" onclick="loginOwner()">Masuk</button>
+<button class="add-btn close-btn" onclick="closeLogin()">Tutup</button>
+</div>
+</div>
+
+<!-- OWNER DASHBOARD -->
+<div class="modal" id="ownerModal">
+<div class="modal-content">
+<h2>⚡ Dashboard Owner</h2>
+
+<input type="text" id="scriptName" placeholder="Nama Script">
+<input type="text" id="scriptPrice" placeholder="Harga">
+<textarea id="scriptDesc" placeholder="Deskripsi"></textarea>
+
+<button class="add-btn" onclick="addScript()">Tambah Script</button>
+<button class="add-btn close-btn" onclick="closeOwner()">Keluar</button>
+</div>
+</div>
+
+<script>
+const OWNER_NAME = "Fahri";
+const OWNER_PASS = "OWNER GANTENG123";
+
+/* GANTI NOMOR OWNER */
+const OWNER_NUMBER = "6285959238467";
+
+let scripts = JSON.parse(localStorage.getItem("robloxScripts")) || [];
+
+function saveScripts(){
+localStorage.setItem("robloxScripts", JSON.stringify(scripts));
+}
+
+function renderScripts(){
+const list = document.getElementById("scriptList");
+
+list.innerHTML = "";
+
+scripts.forEach((item,index)=>{
+
+list.innerHTML += `
+<div class="card">
+
+<div class="script-name">${item.name}</div>
+
+<div class="script-price">
+💸 ${item.price}
+</div>
+
+<div class="script-desc">
+${item.desc}
+</div>
+
+<button class="buy-btn"
+onclick="buyScript('${item.name}','${item.price}')">
+🛒 Beli Sekarang
+</button>
+
+</div>
+`;
+
+});
+
+}
+
+function buyScript(name,price){
+
+const pesan =
+`Halo bang saya mau beli script:
+
+🛒 Script: ${name}
+💸 Harga: ${price}
+
+Apakah masih tersedia?`;
+
+const url =
+`https://wa.me/${OWNER_NUMBER}?text=${encodeURIComponent(pesan)}`;
+
+window.open(url,"_blank");
+
+}
+
+function openLogin(){
+document.getElementById("loginModal").style.display = "flex";
+}
+
+function closeLogin(){
+document.getElementById("loginModal").style.display = "none";
+}
+
+function loginOwner(){
+
+const user =
+document.getElementById("username").value;
+
+const pass =
+document.getElementById("password").value;
+
+if(user === OWNER_NAME && pass === OWNER_PASS){
+
+closeLogin();
+
+document.getElementById("ownerModal").style.display = "flex";
+
+}else{
+
+alert("❌ Password atau nama salah nyet 😹");
+
+}
+
+}
+
+function closeOwner(){
+document.getElementById("ownerModal").style.display = "none";
+}
+
+function addScript(){
+
+const name =
+document.getElementById("scriptName").value;
+
+const price =
+document.getElementById("scriptPrice").value;
+
+const desc =
+document.getElementById("scriptDesc").value;
+
+if(name === "" || price === "" || desc === ""){
+
+alert("Isi dulu semuanya jir 😭");
+
+return;
+
+}
+
+scripts.push({
+name,
+price,
+desc
+});
+
+saveScripts();
+renderScripts();
+
+document.getElementById("scriptName").value = "";
+document.getElementById("scriptPrice").value = "";
+document.getElementById("scriptDesc").value = "";
+
+alert("✅ Script berhasil ditambah 🔥");
+
+}
+
+renderScripts();
+</script>
+
+</body>
+</html>
